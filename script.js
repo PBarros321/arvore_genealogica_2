@@ -2,43 +2,42 @@
 let dadosFamilia = [];
 
 // 2. FUNÇÃO DE CONSTRUÇÃO DE HIERARQUIA (COM SUPER-RAIZ PARA MÚLTIPLOS ANCESTRAIS)
+
+
 function buildHierarchy(data) {
-    // 1. Criar o mapa de pessoas (id -> objeto) para acesso rápido e garantir a estrutura children
+    // 1. Cria um mapa de pessoas e inicializa a propriedade children
     const dataMap = data.reduce((map, node) => {
-        // Clonar o objeto para evitar modificar o array de dados original
         map[node.id] = { ...node, children: [] }; 
         return map;
     }, {});
 
-    let roots = []; // Para armazenar todos os nós que são raízes (sem pai/mãe)
+    let rootNode = null;
 
-    // 2. Iterar sobre os dados para montar a hierarquia
+    // 2. Itera para construir a hierarquia
     data.forEach(node => {
         const fullNode = dataMap[node.id];
-        const paiNode = dataMap[node.pai_id];
         
-        if (paiNode) {
-            paiNode.children.push(fullNode);
-        } else if (node.pai_id === null && node.mae_id === null) {
-            // Se não tem pai nem mãe, é uma raiz
-            roots.push(fullNode);
+        // Verifica se é a raiz (a única pessoa sem pai e mãe)
+        if (node.pai_id === null && node.mae_id === null) {
+            rootNode = fullNode;
+        } else {
+            // Tenta anexar ao pai (se existir)
+            const paiNode = dataMap[node.pai_id];
+            if (paiNode) {
+                paiNode.children.push(fullNode);
+            }
+            // NOTA: Se o nó for filho de um pai que não está no seu JSON, ele será "órfão"
         }
     });
 
-    // 3. Criar uma "Super-Raiz" Virtual se houver mais de uma raiz (seus avós)
-    if (roots.length > 1) {
-        const superRoot = {
-            id: 0, 
-            nome: "Tronco Familiar Principal",
-            children: roots 
-        };
-        return superRoot;
-    } else if (roots.length === 1) {
-        return roots[0];
-    } else {
-        return null; 
+    if (!rootNode) {
+        console.error("Nó raiz (sem pai/mãe) não encontrado no JSON.");
     }
+    
+    return rootNode;
 }
+
+
 
 // 3. FUNÇÃO PRINCIPAL DE CARREGAMENTO (Consolidada)
 async function carregarDados() {
