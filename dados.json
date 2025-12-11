@@ -16,7 +16,7 @@
     "nascimento": "18/10/1935",
     "falecimento": "20/01/1999",
     "foto": "estela.gonçalves.jpg",
-    "pai_id": null,
+    "pai_id": 12,
     "mae_id": null,
     "conjuge_id": 1,
     "filhos_id": [3, 4, 5, 6, 7]
@@ -208,5 +208,4 @@
     "conjuge_id": null,
     "filhos_id": []
   }
-
 ]
