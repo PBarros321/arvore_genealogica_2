@@ -140,4 +140,13 @@ function showDetails(personData) {
     // Aqui você deve criar e mostrar um elemento HTML (modal) com a foto e os dados.
 }
 
+// script.js (no final)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js') // Certifique-se de que o caminho está correto
+      .then(reg => console.log('Service Worker Registrado!', reg))
+      .catch(err => console.log('Erro no Service Worker:', err));
+  });
+}
+
 carregarDados();
