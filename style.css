@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+#arvore-container {
+    width: 100vw;
+    height: 100vh;
+}
+/* style.css */
+/* ... seu CSS existente ... */
+
+.link {
+    fill: none;
+    stroke: #555;
+    stroke-opacity: 0.4;
+    stroke-width: 1.5px;
+}
+
+.node circle {
+    cursor: pointer;
+    stroke: #000;
+    stroke-width: 2px;
+}
+
+.node text {
+    font-size: 12px;
+    font-weight: 500;
+    fill: #333;
+}
+
+#arvore-container svg {
+    display: block;
+    margin: auto;
+}
