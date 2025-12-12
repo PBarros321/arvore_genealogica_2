@@ -6,8 +6,8 @@ body {
 }
 
 #arvore-container {
-    width: 500px;
-    height: 200px;
+    width: 100vw;
+    height: 1000px;
 }
 /* style.css */
 /* ... seu CSS existente ... */
